@@ -1,0 +1,59 @@
+
+PARSER_BEGIN(AnalLL1)
+public class AnalLL1 {
+  public static void main(String[] args) {
+          AnalLL1 parser = new AnalLL1(System.in);
+          parser.LL1Axiome();
+      }
+}
+PARSER_END(AnalLL1)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+
+TOKEN : {
+    <entier_positive : (["0"-"9"])+ ["+"]>
+  | <entier_negative : ["-"](["0"-"9"])+ ["+"]>
+  | <nbr_reel  : (["0"-"9"])+ [","](["0"-"9"]) +>
+
+}
+
+
+
+void LL1Axiome() : {}
+{
+  E() <EOF>
+}
+
+
+void E () : {}
+{
+   (EnsembleLignes())?
+}
+
+
+void EnsembleLignes() : {}
+{
+    MV()
+    S()
+    | C()
+    S()
+}
+
+void S () : {}
+{
+   (EnsembleLignes())?
+}
+
+void MV() : {}
+{
+   (EnsembleLignes())?
+}
+
+
